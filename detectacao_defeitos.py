@@ -13,7 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from algoritmos_deteccao import AlgoritmoAleatorio, AlgoritmoHeuristico
 
-# Importa Deep Learning se disponível
+# Importa Deep Learning 
 try:
     from deep_learning import AlgoritmoDeepLearning
     DEEP_LEARNING_DISPONIVEL = True
@@ -32,7 +32,7 @@ class SistemaDetecaoDefeitos:
         self.algo_aleatorio = AlgoritmoAleatorio(seed=42)
         self.algo_heuristico = AlgoritmoHeuristico()
         
-        # Inicializa Deep Learning se disponível
+        # Inicializa Deep Learning 
         if DEEP_LEARNING_DISPONIVEL:
             try:
                 self.algo_deep_learning = AlgoritmoDeepLearning(usar_transfer_learning=True)
@@ -43,13 +43,13 @@ class SistemaDetecaoDefeitos:
         else:
             self.algo_deep_learning = None
         
-        # Cria pasta se não existir
+        # Cria pasta 
         os.makedirs(self.pasta_imagens, exist_ok=True)
         
         # Cria pasta para modelos de Deep Learning
         os.makedirs("modelos_deep_learning", exist_ok=True)
         
-        # Extensões de imagem suportadas
+        # Extensões de imagem 
         self.extensoes_validas = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff'}
     
     def listar_imagens_disponiveis(self):
@@ -81,7 +81,7 @@ class SistemaDetecaoDefeitos:
             pred_aleatorio = self.algo_aleatorio.prever_uma(imagem_redim)
             pred_heuristico = self.algo_heuristico.prever_uma(imagem_redim)
             
-            # Executa análise de Deep Learning se disponível
+            # Executa análise de Deep Learning
             pred_deep_learning = None
             caracteristicas_dl = None
             if self.algo_deep_learning is not None:
@@ -129,7 +129,7 @@ class SistemaDetecaoDefeitos:
         print(f"   Algoritmo Aleatorio: {status_aleatorio} {resultado['pred_aleatorio'].upper()}")
         print(f"   Algoritmo Heuristico: {status_heuristico} {resultado['pred_heuristico'].upper()}")
         
-        # Mostra resultados de Deep Learning se disponível
+        # Mostra resultados de Deep Learning 
         if resultado['pred_deep_learning'] is not None:
             status_dl = "[DEFEITO]" if resultado['pred_deep_learning'] == "defeito" else "[OK]"
             if resultado['caracteristicas_dl']:
@@ -145,7 +145,7 @@ class SistemaDetecaoDefeitos:
         print(f"   Threshold Bordas: {char['threshold_bordas']}")
         print(f"   Threshold Intensidade: {char['threshold_intensidade']}")
         
-        # Mostra características de Deep Learning se disponível
+        # Mostra características de Deep Learning 
         if resultado['caracteristicas_dl']:
             print(f"\nCARACTERISTICAS TECNICAS (Deep Learning):")
             char_dl = resultado['caracteristicas_dl']
@@ -218,7 +218,7 @@ class SistemaDetecaoDefeitos:
                 elif os.name == 'posix':  # Linux/Mac
                     os.system(f'xdg-open {imagem_resultado}')
         except:
-            pass  # Se não conseguir, continua
+            pass  # 
     
     def executar_sistema(self):
         """Executa o sistema principal."""
